@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Listado de Asistencias{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Listado de Asistencias</h1>
+    
+    <!-- Mostrar las horas registradas por asignatura -->
+    <h3 class="mt-4">Horas Registradas por Asignatura</h3>
+    <table class="table table-striped mt-2">
+        <thead class="table-dark">
+            <tr>
+                <th>Asignatura</th>
+                <th>Total Horas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asignatura in horas_por_asignatura %}
+            <tr>
+                <td>{{ asignatura.asignatura__nombre }}</td>
+                <td>{{ asignatura.total_horas }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Listado de asistencias -->
+    <h3 class="mt-4">Detalles de Asistencias</h3>
+    <table class="table table-striped mt-4">
+        <thead class="table-dark">
+            <tr>
+                <th>Asignatura</th>
+                <th>Usuario</th>
+                <th>Horas</th>
+                <th>Fecha</th>
+                {% if es_lider %}
+                <th>Acciones</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for asistencia in asistencias %}
+            <tr>
+                <td>{{ asistencia.asignatura.nombre }}</td>
+                <td>{{ asistencia.usuario.username }}</td>
+                <td>{{ asistencia.horas }}</td>
+                <td>{{ asistencia.fecha }}</td>
+                {% if es_lider %}
+                <td>
+                    <!-- Botón de eliminar -->
+                    <a href="{% url 'eliminar_asistencia' asistencia.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    <!-- Botón de editar -->
+                    <a href="{% url 'editar_asistencia' asistencia.id %}" class="btn btn-warning btn-sm ml-2">Editar</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

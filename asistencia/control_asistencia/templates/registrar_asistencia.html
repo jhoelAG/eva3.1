@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Registrar Asistencia{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Registrar Asistencia</h1>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="asignatura" class="form-label">Asignatura</label>
+            <select name="asignatura" id="asignatura" class="form-select">
+                {% for asignatura in asignaturas %}
+                <option value="{{ asignatura.id }}">{{ asignatura.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="horas" class="form-label">Horas</label>
+            <input type="number" name="horas" id="horas" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Registrar</button>
+    </form>
+</div>
+{% endblock %}

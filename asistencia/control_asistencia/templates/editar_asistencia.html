@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Asistencia{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Editar Asistencia</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="asignatura" class="form-label">Asignatura</label>
+            <select class="form-control" id="asignatura" name="asignatura" required>
+                {% for asignatura in asignaturas %}
+                    <option value="{{ asignatura.id }}" {% if asignatura.id == asistencia.asignatura.id %}selected{% endif %}>{{ asignatura.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="horas" class="form-label">Horas</label>
+            <input type="number" class="form-control" id="horas" name="horas" value="{{ asistencia.horas }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Actualizar Asistencia</button>
+    </form>
+</div>
+{% endblock %}

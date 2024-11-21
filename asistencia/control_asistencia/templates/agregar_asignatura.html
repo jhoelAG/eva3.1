@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Agregar Asignatura{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Agregar Asignatura</h1>
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre de la Asignatura</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Agregar</button>
+    </form>
+</div>
+{% endblock %}
